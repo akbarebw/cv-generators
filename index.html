@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ATS-Compliant CV Generator</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="form-section">
+                <h1>Generator Surat Lamaran ATS</h1>
+                <form id="cvForm">
+                    <div class="form-group">
+                        <label for="companyName"
+                            >Nama Perusahaan (Opsional):</label
+                        >
+                        <input
+                            type="text"
+                            id="companyName"
+                            name="companyName"
+                            placeholder="CV. PRIMA MANDIRI SAKTI"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Posisi yang Dilamar:</label>
+                        <input
+                            type="text"
+                            id="position"
+                            name="position"
+                            placeholder="Staff Administrasi"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signature">Upload Tanda Tangan:</label>
+                        <input
+                            type="file"
+                            id="signature"
+                            name="signature"
+                            accept="image/*"
+                            required
+                        />
+                        <div id="signaturePreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="documentList">Daftar Dokumen (pisahkan dengan koma):</label>
+                        <input type="text" id="documentList" name="documentList" placeholder="Contoh: CV, Ijazah, Transkip, Foto" />
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="generateBtn">
+                            Generate Preview
+                        </button>
+                        <button type="button" id="exportBtn" disabled>
+                            Export to PDF
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="preview-section">
+                <div id="cvPreview" class="cv-document">
+                    <div class="cv-header">
+                        <p class="cv-subject">Perihal : Lamaran Pekerjaan</p>
+                        <p class="cv-recipient">
+                            Yth. HRD
+                            <span id="previewCompany"
+                                >CV. PRIMA MANDIRI SAKTI</span
+                            >
+                        </p>
+                        <p class="cv-location">Samarinda</p>
+                        <br />
+                        <p class="cv-greeting">Dengan Hormat,</p>
+                        <p class="cv-intro">
+                            Saya yang bertandatangan dibawah ini:
+                        </p>
+                    </div>
+
+                    <div class="cv-personal-info">
+                        <table class="info-table">
+                            <tr>
+                                <td class="info-label">Nama</td>
+                                <td class="info-colon">:</td>
+                                <td class="info-value">Salmah Nur Laila</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Jenis Kelamin</td>
+                                <td class="info-colon">:</td>
+                                <td class="info-value">Perempuan</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Umur</td>
+                                <td class="info-colon">:</td>
+                                <td class="info-value">23 Tahun</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Pendidikan Terakhir</td>
+                                <td class="info-colon">:</td>
+                                <td class="info-value">S1 Manajemen</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Alamat</td>
+                                <td class="info-colon">:</td>
+                                <td class="info-value">
+                                    Perumahan Green Pinang Residance, Jln P
+                                    Suryanata Blok A1 NO. 8, Bukit Pinang
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Telp</td>
+                                <td class="info-colon">:</td>
+                                <td class="info-value">085314847852</td>
+                            </tr>
+                            <tr>
+                                <td class="info-label">Email</td>
+                                <td class="info-colon">:</td>
+                                <td class="info-value">
+                                    lailasalmahnur@gmail.com
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="cv-body">
+                        <p class="cv-paragraph">
+                            Dengan ini mengajukan lamaran untuk posisi
+                            <span id="previewPosition">Staff Administrasi</span>
+                            sesuai informasi lowongan kerja yang saya peroleh.
+                        </p>
+
+                        <p class="cv-paragraph">
+                            Saya memiliki kemampuan yang relevan dalam manajamen
+                            sumber daya manusia dan administrasi seperti
+                            kemampuan Microsoft Office serta bersemangat untuk
+                            terus belajar dan berkembang. Saya terbiasa bekerja
+                            secara tim maupun individu serta saya sangat siap
+                            untuk memberikan kinerja dan kontribusi terbaik
+                            saya.
+                        </p>
+
+                        <p class="cv-paragraph">
+                            Sebagai bahan pertimbangan, saya melampirkan dokumen
+                            berikut:
+                        </p>
+                        <ul class="cv-list" id="previewDocumentList">
+                                                        <!-- <li>Curriculum Vitae</li>
+                            <li>Ijazah Terakhir, dan Transkip Nilai</li>
+                            <li>Foto Terbaru</li>
+                            <li>Berkas Pendukung</li> -->
+                        </ul>
+
+                        <p class="cv-paragraph">
+                            Besar harapan saya untuk mendapatkan kesempatan
+                            mengikuti proses seleksi di tempat yang Bapak/Ibu
+                            pimpin. Saya siap dihubungi melalui kontak yang
+                            tertera di atas untuk informasi lebih lanjut. Atas
+                            perhatian dan kesempatan yang diberikan, saya
+                            ucapkan terima kasih.
+                        </p>
+                    </div>
+
+                    <div class="cv-footer">
+                        <div class="signature-section">
+                            <p class="closing">Hormat Saya,</p>
+                            <div class="signature-container">
+                                <img
+                                    id="signatureImage"
+                                    src=""
+                                    alt="Tanda Tangan"
+                                    style="display: none"
+                                />
+                            </div>
+                            <p class="name">Salmah Nur Laila</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

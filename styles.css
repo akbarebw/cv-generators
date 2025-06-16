@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+    width: 30%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+}
+
+.form-section h1 {
+    font-size: 18pt;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+
+#signaturePreview {
+    margin-top: 10px;
+    text-align: center;
+}
+
+#signaturePreview img {
+    max-width: 150px;
+    max-height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.form-actions button {
+    padding: 12px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    transition: background-color 0.3s;
+}
+
+#generateBtn {
+    background-color: #007bff;
+    color: white;
+}
+
+#generateBtn:hover {
+    background-color: #0056b3;
+}
+
+#exportBtn {
+    background-color: #28a745;
+    color: white;
+}
+
+#exportBtn:hover:not(:disabled) {
+    background-color: #1e7e34;
+}
+
+#exportBtn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.preview-section {
+    width: 70%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.cv-document {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Times New Roman', serif;
+    font-size: 12pt;
+    line-height: 1.6;
+}
+
+.cv-header p {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.cv-subject {
+    font-weight: normal;
+}
+
+.cv-recipient {
+    font-weight: normal;
+}
+
+.cv-location {
+    font-weight: normal;
+}
+
+.cv-greeting,
+.cv-intro {
+    font-weight: normal;
+}
+
+.cv-personal-info {
+    margin: 20px 0;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.info-table td {
+    vertical-align: top;
+    padding: 2px 0;
+}
+
+.info-label {
+    width: 180px;
+    font-weight: normal;
+}
+
+.info-colon {
+    width: 20px;
+    text-align: center;
+}
+
+.info-value {
+    text-align: justify;
+}
+
+.cv-body {
+    margin: 20px 0;
+}
+
+.cv-paragraph {
+    margin-bottom: 12px;
+    text-align: justify;
+    text-indent: 0;
+}
+
+.cv-list {
+    margin: 12px 0;
+    padding-left: 20px;
+}
+
+.cv-list li {
+    margin-bottom: 4px;
+    text-align: justify;
+}
+
+.cv-footer {
+    margin-top: 40px;
+}
+
+.signature-section {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.closing {
+    /* margin-bottom: 20px; */
+}
+
+.signature-container {
+    height: 60px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+#signatureImage {
+    max-width: 150px;
+    max-height: 80px;
+    object-fit: contain;
+    position: absolute;
+    right: 0;
+    /* top: 10px; */
+    cursor: move;
+    border: 2px dashed transparent;
+    transition: border-color 0.2s;
+}
+
+#signatureImage.draggable {
+    border-color: #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+#signatureImage:hover {
+    border-color: #007bff;
+}
+
+.name {
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* Print styles for PDF */
+@media print {
+    body {
+        background-color: white;
+    }
+
+    .container {
+        box-shadow: none;
+    }
+
+    .form-section {
+        display: none;
+    }
+
+    .preview-section {
+        width: 100%;
+    }
+
+    .cv-document {
+        box-shadow: none;
+        margin: 0;
+        padding: 20px;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form-section,
+    .preview-section {
+        width: 100%;
+    }
+
+    .form-section {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+@media (max-width: 768px) {
+    .cv-document {
+        padding: 20px;
+        font-size: 11pt;
+    }
+
+    .info-label {
+        width: 140px;
+    }
+
+    .signature-container {
+        height: 20px;
+    }
+
+    #signatureImage {
+        max-width: 120px;
+        max-height: 60px;
+    }
+}
