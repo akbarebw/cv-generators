@@ -58,6 +58,9 @@ class CVGenerator {
 
             this.signatureImage.src = e.target.result;
             this.signatureImage.style.display = 'block';
+            this.signatureImage.style.backgroundColor = 'transparent';
+            this.signatureImage.style.outline = 'none';
+
         };
         reader.onerror = () => {
             alert('Gagal membaca file.');
